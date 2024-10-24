@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request,flash
+from flask import Flask, render_template, url_for, redirect, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -17,6 +17,12 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 db = SQLAlchemy(app)
+
+# Create tables before the first request
+@app.before_first_request
+def create_tables():
+    db.create_all()  # This will create the database tables if they don't exist
+
 app.app_context().push()
 
 # Correctly define the User model
@@ -86,9 +92,6 @@ def home():
 def dashboard():
     secrets = Secret.query.filter_by(user_id=current_user.id).all()  # Get secrets for the logged-in user
     return render_template("dashboard.html", username=current_user.username, secrets=secrets)
-
-@app.route("/login", methods=['GET', 'POST'])
-
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
