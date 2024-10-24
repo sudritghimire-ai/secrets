@@ -4,11 +4,10 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired, Length, ValidationError
-import os
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-#postgresql://database_e27p_user:lxdMcjr7GJXgXrkktmWxAu0FNEwqw6ZT@dpg-csd2pljv2p9s73fr2f90-a.oregon-postgres.render.com/database_e27p
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://database_e27p_user:your_password@dpg-csd2pljv2p9s73fr2f90-a:5432/database_e27p"
+
 app.config["SECRET_KEY"] = "thisisasecretkey"
 login_manager = LoginManager()
 login_manager.init_app(app)
