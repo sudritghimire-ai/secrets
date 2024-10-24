@@ -32,3 +32,5 @@ urllib3==2.2.3
 Werkzeug==3.0.4
 wsproto==1.2.0
 WTForms==3.2.1
+psycopg2-binary==2.9.5  # Make sure this line is included
+
