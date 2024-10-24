@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5; /* Light background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height of the viewport */
+            margin: 0;
+        }
+        .container {
+            background-color: white; /* White background for the form */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 40px; /* Padding inside the container */
+            width: 300px; /* Fixed width for the form */
+            text-align: center; /* Center text */
+        }
+        h1 {
+            color: #333; /* Darker text color */
+            margin-bottom: 20px; /* Space below the heading */
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Full width */
+            padding: 10px; /* Padding inside the input */
+            margin: 10px 0; /* Space between inputs */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 5px; /* Slightly rounded edges */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+        input[type="submit"] {
+            background-color: #4CAF50; /* Green color */
+            color: white; /* White text color */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px; /* Padding inside the button */
+            cursor: pointer; /* Pointer on hover */
+            width: 100%; /* Full width */
+            transition: background-color 0.3s; /* Smooth background color transition */
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049; /* Darker shade on hover */
+        }
+        .error {
+            color: red; /* Red for error messages */
+            font-size: 0.9em; /* Smaller font size for errors */
+            margin: 5px 0; /* Space around error messages */
+        }
+        a {
+            color: #007bff; /* Link color */
+            text-decoration: none; /* No underline */
+            display: block; /* Make it block to center */
+            margin-top: 15px; /* Space above the link */
+        }
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Log In</h1>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <!-- Display error messages if any -->
+            {% with messages = get_flashed_messages(with_categories=True) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                    <div class="error">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            {% for message in form.username.errors %}
+                <div class="error">{{ message }}</div>
+            {% endfor %}
+            {{ form.username(class="form-control") }}<br>
+
+            {% for message in form.password.errors %}
+                <div class="error">{{ message }}</div>
+            {% endfor %}
+            {{ form.password(class="form-control") }}<br>
+
+            {{ form.submit(class="btn") }}
+        </form>
+        <a href="{{ url_for('signup') }}">Don't have an account? Sign Up</a>
+    </div>
+</body>
+</html>
