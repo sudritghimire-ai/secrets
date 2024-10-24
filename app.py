@@ -6,7 +6,7 @@ from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired, Length, ValidationError
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://database_e27p_user:your_password@dpg-csd2pljv2p9s73fr2f90-a:5432/database_e27p"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 
 app.config["SECRET_KEY"] = "thisisasecretkey"
 login_manager = LoginManager()
